@@ -13,6 +13,7 @@
   	<module>st-admin-web</module>
     <module>st-biz</module>
     <module>st-dal</module>
+    <module>st-job</module>
   </modules>
   
   <properties>
