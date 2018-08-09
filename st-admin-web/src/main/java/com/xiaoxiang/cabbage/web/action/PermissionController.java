@@ -1,4 +1,4 @@
-package com.xiaoxiang.web.cabbagge.controller;
+package com.xiaoxiang.cabbage.web.action;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 

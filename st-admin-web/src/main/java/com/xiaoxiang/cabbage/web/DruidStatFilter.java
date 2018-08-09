@@ -1,4 +1,4 @@
-package com.xiaoxiang.web.cabbagge;
+package com.xiaoxiang.cabbage.web;
 
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
