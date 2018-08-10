@@ -21,7 +21,7 @@ public class ApiConfig {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.xiaoxiang.web.cabbagge"))
+				.apis(RequestHandlerSelectors.basePackage("com.xiaoxiang.cabbage.web.action"))
 				.paths(PathSelectors.any())
 				.build();
 	}
