@@ -18,7 +18,7 @@ public class Generator {
 
 		//自动产生代码生成改造 by james
 		JdbcConfig jdbc = new JdbcConfig(
-				"jdbc:postgresql://localhost/test",
+				"jdbc:postgresql://localhost/bmac",
 				"postgres", "admin123",
 				"org.postgresql.Driver");
 
@@ -32,6 +32,12 @@ public class Generator {
 
 		List<GeneratorTable> tableList=Lists.newArrayList(
 				new GeneratorTable("public", "sys_permission", "Permission")
+//				new GeneratorTable("public", "sys_role", "Role"),
+//				new GeneratorTable("public", "sys_user", "User"),
+//				new GeneratorTable("public", "sys_role_permission", "RolePermission"),
+//				new GeneratorTable("public", "sys_user_account", "UserAccount"),
+//				new GeneratorTable("public", "sys_user_role", "UserRole"),
+//				new GeneratorTable("public", "user_admin", "Admin")
 		);
 				
 		tool.generator(tableList);

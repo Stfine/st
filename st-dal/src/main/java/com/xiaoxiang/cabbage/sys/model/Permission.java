@@ -1,6 +1,7 @@
 package com.xiaoxiang.cabbage.sys.model;
 
 import com.sinco.mybatis.dal.model.BaseModel;
+import java.util.Date;
 
 public class Permission extends BaseModel {
     private Long id;
@@ -9,13 +10,15 @@ public class Permission extends BaseModel {
     private String name;
 
     /** code **/
-    private String code;
+    private String value;
 
     /** 组名称 **/
     private String groupName;
 
+    private Date createTime;
+
     /** 类型 **/
-    private Short userTyep;
+    private Integer userType;
 
     public Long getId() {
         return id;
@@ -33,12 +36,12 @@ public class Permission extends BaseModel {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public String getValue() {
+        return value;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getGroupName() {
@@ -49,11 +52,19 @@ public class Permission extends BaseModel {
         this.groupName = groupName;
     }
 
-    public Short getUserTyep() {
-        return userTyep;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setUserTyep(Short userTyep) {
-        this.userTyep = userTyep;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 }

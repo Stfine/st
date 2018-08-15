@@ -3,6 +3,7 @@ package com.xiaoxiang.cabbage.sys.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dozer.fieldmap.ExcludeFieldMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.google.common.collect.Lists;
@@ -18,7 +19,22 @@ public class PermissionDao {
 	@Autowired
 	private PermissionMapper mapper;
 
-
+	public List<PermissionBO> findNotInValues(List<String> listVlues,int userType) {
+		PermissionExample example=new PermissionExample();
+		example.createCriteria()
+		.andUserTypeEqualTo(userType)
+		.andValueNotIn(listVlues);
+		return mapper.selectByExample(example);
+	}
+	
+	public void deleteNotInValues(List<String> list,int userType) {
+		PermissionExample example=new PermissionExample();
+		example.createCriteria()
+		.andUserTypeEqualTo(userType)
+		.andValueNotIn(list);
+		mapper.deleteByExample(example);
+	}
+	
    /** generate code begin**/
 	public List<PermissionBO> findAll(){
 		PermissionExample example=new PermissionExample();
@@ -101,4 +117,7 @@ public class PermissionDao {
 		mapper.deleteByExample(example);
 	}
 	/** generate code end**/
+
+
+	
 }

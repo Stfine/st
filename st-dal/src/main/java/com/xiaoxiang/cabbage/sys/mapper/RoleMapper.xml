@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiaoxiang.cabbage.sys.mapper.PermissionMapper">
-  <resultMap id="BaseResultMap" type="com.xiaoxiang.cabbage.sys.model.Permission">
+<mapper namespace="com.xiaoxiang.cabbage.sys.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.xiaoxiang.cabbage.sys.model.Role">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="value" jdbcType="VARCHAR" property="value" />
-    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="BOResultMap" type="com.xiaoxiang.cabbage.sys.bo.PermissionBO" />
+  <resultMap extends="BaseResultMap" id="BOResultMap" type="com.xiaoxiang.cabbage.sys.bo.RoleBO" />
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, value, group_name, create_time, user_type
+    id, create_by, create_time, update_by, update_time, status, remark, name
   </sql>
-  <select id="selectByExample" parameterType="com.xiaoxiang.cabbage.sys.model.PermissionExample" resultMap="BOResultMap">
+  <select id="selectByExample" parameterType="com.xiaoxiang.cabbage.sys.model.RoleExample" resultMap="BOResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from public.sys_permission
+    from public.sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,96 +93,114 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BOResultMap">
     select 
     <include refid="Base_Column_List" />
-    from public.sys_permission
+    from public.sys_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from public.sys_permission
+    delete from public.sys_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.xiaoxiang.cabbage.sys.model.PermissionExample">
-    delete from public.sys_permission
+  <delete id="deleteByExample" parameterType="com.xiaoxiang.cabbage.sys.model.RoleExample">
+    delete from public.sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyProperty="id" parameterType="com.xiaoxiang.cabbage.sys.model.Permission" useGeneratedKeys="true">
-    insert into public.sys_permission (id, name, value, 
-      group_name, create_time, user_type
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
-      #{groupName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{userType,jdbcType=INTEGER}
-      )
+  <insert id="insert" keyProperty="id" parameterType="com.xiaoxiang.cabbage.sys.model.Role" useGeneratedKeys="true">
+    insert into public.sys_role (id, create_by, create_time, 
+      update_by, update_time, status, 
+      remark, name)
+    values (#{id,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, 
+      #{remark,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyProperty="id" parameterType="com.xiaoxiang.cabbage.sys.model.Permission" useGeneratedKeys="true">
-    insert into public.sys_permission
+  <insert id="insertSelective" keyProperty="id" parameterType="com.xiaoxiang.cabbage.sys.model.Role" useGeneratedKeys="true">
+    insert into public.sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="value != null">
-        value,
-      </if>
-      <if test="groupName != null">
-        group_name,
+      <if test="createBy != null">
+        create_by,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="userType != null">
-        user_type,
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="name != null">
+        name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null">
-        #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="groupName != null">
-        #{groupName,jdbcType=VARCHAR},
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userType != null">
-        #{userType,jdbcType=INTEGER},
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.xiaoxiang.cabbage.sys.model.PermissionExample" resultType="java.lang.Long">
-    select count(*) from public.sys_permission
+  <select id="countByExample" parameterType="com.xiaoxiang.cabbage.sys.model.RoleExample" resultType="java.lang.Long">
+    select count(*) from public.sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update public.sys_permission
+    update public.sys_role
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.value != null">
-        value = #{record.value,jdbcType=VARCHAR},
-      </if>
-      <if test="record.groupName != null">
-        group_name = #{record.groupName,jdbcType=VARCHAR},
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=BIGINT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.userType != null">
-        user_type = #{record.userType,jdbcType=INTEGER},
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -188,45 +208,55 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update public.sys_permission
+    update public.sys_role
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      value = #{record.value,jdbcType=VARCHAR},
-      group_name = #{record.groupName,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      user_type = #{record.userType,jdbcType=INTEGER}
+      update_by = #{record.updateBy,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=SMALLINT},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoxiang.cabbage.sys.model.Permission">
-    update public.sys_permission
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaoxiang.cabbage.sys.model.Role">
+    update public.sys_role
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null">
-        value = #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="groupName != null">
-        group_name = #{groupName,jdbcType=VARCHAR},
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userType != null">
-        user_type = #{userType,jdbcType=INTEGER},
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xiaoxiang.cabbage.sys.model.Permission">
-    update public.sys_permission
-    set name = #{name,jdbcType=VARCHAR},
-      value = #{value,jdbcType=VARCHAR},
-      group_name = #{groupName,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.xiaoxiang.cabbage.sys.model.Role">
+    update public.sys_role
+    set create_by = #{createBy,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      user_type = #{userType,jdbcType=INTEGER}
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
