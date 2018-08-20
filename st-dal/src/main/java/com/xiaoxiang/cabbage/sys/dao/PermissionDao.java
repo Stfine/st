@@ -19,6 +19,20 @@ public class PermissionDao {
 	@Autowired
 	private PermissionMapper mapper;
 
+	public List<PermissionBO> findByUid(Long uid, int userType) {
+		return mapper.findByUid(uid,userType);
+	}
+	
+	public PermissionBO findByValueAndUserType(String value, int userType) {
+		PermissionExample example=new PermissionExample();
+		example.createCriteria()
+		.andUserTypeEqualTo(userType)
+		.andValueEqualTo(value);
+		List<PermissionBO> list = mapper.selectByExample(example);
+		return list.isEmpty()?null:list.get(0);
+		
+	}
+	
 	public List<PermissionBO> findNotInValues(List<String> listVlues,int userType) {
 		PermissionExample example=new PermissionExample();
 		example.createCriteria()
@@ -117,7 +131,6 @@ public class PermissionDao {
 		mapper.deleteByExample(example);
 	}
 	/** generate code end**/
-
 
 	
 }

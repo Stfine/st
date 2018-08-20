@@ -2,40 +2,40 @@ package com.xiaoxiang.cabbate.service.sys.exception;
 
 import org.apache.shiro.authc.AccountException;
 
-public class UnknownAccountException extends AccountException{
+public class UnKnowAccountException extends AccountException{
 
 	/**
-     * Creates a new UnknownAccountException.
+     * Creates a new UnKnowAccountException.
      */
-    public UnknownAccountException() {
+    public UnKnowAccountException() {
         super();
     }
 
     /**
-     * Constructs a new UnknownAccountException.
+     * Constructs a new UnKnowAccountException.
      *
      * @param message the reason for the exception
      */
-    public UnknownAccountException(String message) {
+    public UnKnowAccountException(String message) {
         super(message);
     }
 
     /**
-     * Constructs a new UnknownAccountException.
+     * Constructs a new UnKnowAccountException.
      *
      * @param cause the underlying Throwable that caused this exception to be thrown.
      */
-    public UnknownAccountException(Throwable cause) {
+    public UnKnowAccountException(Throwable cause) {
         super(cause);
     }
 
     /**
-     * Constructs a new UnknownAccountException.
+     * Constructs a new UnKnowAccountException.
      *
      * @param message the reason for the exception
      * @param cause   the underlying Throwable that caused this exception to be thrown.
      */
-    public UnknownAccountException(String message, Throwable cause) {
+    public UnKnowAccountException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -28,4 +28,6 @@ public interface PermissionMapper {
     int updateByPrimaryKeySelective(Permission record);
 
     int updateByPrimaryKey(Permission record);
+
+	List<PermissionBO> findByUid(@Param("uid")Long uid, @Param("userType")int userType);
 }
